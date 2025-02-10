@@ -1,7 +1,6 @@
-# app/core/config.py
 import os
 
 class Settings:
-    DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg2://user:pass@localhost:5432/mydb")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/postgres")
 
 settings = Settings()

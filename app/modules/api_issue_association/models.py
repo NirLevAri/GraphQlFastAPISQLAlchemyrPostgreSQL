@@ -1,13 +1,9 @@
-from sqlalchemy import Column, ForeignKey, Integer
-from sqlalchemy.orm import relationship
-
+from sqlalchemy import Table, Column, Integer, ForeignKey
 from app.core.db import Base
 
-class API_Issue_Association(Base):
-    __tablename__ = "api_issue_association"
-
-    api_id = Column(Integer, ForeignKey("apis.id"), primary_key=True)
-    issue_id = Column(Integer, ForeignKey("issues.id"), primary_key=True)
-
-    api = relationship("API", back_populates="issues")
-    issue = relationship("Issue", back_populates="apis")
+api_issue_association = Table(
+    "api_issue_association",
+    Base.metadata,
+    Column("api_id", Integer, ForeignKey("apis.id"), primary_key=True),
+    Column("issue_id", Integer, ForeignKey("issues.id"), primary_key=True)
+)

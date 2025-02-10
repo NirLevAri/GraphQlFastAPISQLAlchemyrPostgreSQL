@@ -1,28 +1,26 @@
-version: "3.9"
+version: '3.9'
 
 services:
   db:
-    image: postgres:15
-    container_name: my_app_db
+    image: postgres:13
+    restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: mydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
-  backend:
+  web:
     build: .
-    container_name: my_app_backend
+    ports:
+      - "8000:8000"
     depends_on:
       - db
     environment:
-      # Here, we reference the Postgres container by its service name "db"
-      DATABASE_URL: "postgresql+psycopg2://user:pass@db:5432/mydb"
-    ports:
-      - "8000:8000"
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/postgres"
 
 volumes:
-  db_data:
+  postgres_data:
