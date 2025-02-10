@@ -5,5 +5,7 @@ api_issue_association = Table(
     "api_issue_association",
     Base.metadata,
     Column("api_id", Integer, ForeignKey("apis.id"), primary_key=True),
-    Column("issue_id", Integer, ForeignKey("issues.id"), primary_key=True)
+    Column("issue_id", Integer, ForeignKey("issues.id"), primary_key=True),
+    extend_existing=True  
 )
+
