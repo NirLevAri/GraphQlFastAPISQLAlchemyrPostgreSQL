@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.db import get_db
@@ -11,7 +12,7 @@ def create_issue_endpoint(issue: IssueCreate, db: Session = Depends(get_db)):
     service = IssueService(db)
     return service.create_issue(issue)
 
-@router.get("/", response_model=list[IssueOut])
+@router.get("/", response_model=List[IssueOut])
 def read_issues_endpoint(db: Session = Depends(get_db)):
     service = IssueService(db)
     return service.get_issues()

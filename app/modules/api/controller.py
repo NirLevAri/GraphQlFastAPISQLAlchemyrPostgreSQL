@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.db import get_db
@@ -11,7 +12,7 @@ def create_api(api_data: APICreate, db: Session = Depends(get_db)):
     service = APIService(db)
     return service.create_api(api_data)
 
-@router.get("/", response_model=list[APIOut])
+@router.get("/", response_model=List[APIOut])
 def read_apis(include_issues: bool = False, db: Session = Depends(get_db)):
     service = APIService(db)
     return service.get_apis(include_issues=include_issues)

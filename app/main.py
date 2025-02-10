@@ -1,14 +1,14 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from app.core.db import engine, Base
-from app.routes import router as routes
+from app.routes import router as routes_api
 from app.graphql.schema import schema
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(routes)
+app.include_router(routes_api)
 
 @app.post("/graphql")
 async def graphql_endpoint(request: Request):

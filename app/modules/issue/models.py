@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from app.core.db import Base
-from app.modules.api_issue_association import api_issue_association
+from app.modules.api_issue_association.models import api_issue_association
 
 class Issue(Base):
     __tablename__ = "issues"

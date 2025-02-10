@@ -1,3 +1,4 @@
+from typing import Optional, List
 from sqlalchemy.orm import Session, joinedload
 from app.modules.api.models import API
 from app.modules.api.schemas import APICreate, APIUpdate
@@ -13,16 +14,16 @@ class APIService:
         self.db.refresh(db_api)
         return db_api
 
-    def get_apis(self, include_issues: bool = False) -> list[API]:
+    def get_apis(self, include_issues: bool = False) -> List[API]:
         query = self.db.query(API)
         if include_issues:
             query = query.options(joinedload(API.issues))
         return query.all()
 
-    def get_api(self, api_id: int) -> API | None:
+    def get_api(self, api_id: int) -> Optional[API]:
         return self.db.query(API).filter(API.id == api_id).first()
 
-    def update_api(self, api_id: int, api_data: APIUpdate) -> API | None:
+    def update_api(self, api_id: int, api_data: APIUpdate) -> Optional[API]:
         api = self.db.query(API).filter(API.id == api_id).first()
         if not api:
             return None

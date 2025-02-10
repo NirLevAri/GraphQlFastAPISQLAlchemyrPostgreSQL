@@ -19,7 +19,7 @@ class IssueOut(BaseModel):
     apis: Optional[List["APIOut"]] = None
 
     class Config:
-        orm_mode = True
+       from_attributes = True
 
 from app.modules.api.schemas import APIOut
 IssueOut.update_forward_refs()

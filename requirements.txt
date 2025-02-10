@@ -5,3 +5,6 @@ pydantic
 graphene
 graphene-sqlalchemy
 uvicorn
+promise
+graphql-relay==2.0.0
+graphql-core==2.3.2
